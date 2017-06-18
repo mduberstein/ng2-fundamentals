@@ -3,6 +3,7 @@ typings
 /app/**/*.js
 /app/**/*.map
 .vscode/
+npm-debug.log
 npm-debug.log.*
 
 
