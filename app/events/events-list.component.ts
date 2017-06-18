@@ -10,7 +10,10 @@ import {Component} from '@angular/core'
         </div>
         <hr/>
         <event-thumbnail #thumbnail [event]="event1"></event-thumbnail>
-        `
+        `,
+        styles:[`
+            .well div { color: red;}
+        `]
 })
 export class EventsListComponent{
     event1 =
