@@ -8,7 +8,7 @@ import {Component} from '@angular/core'
             <hr/>
             <div class="row">
                 <div *ngFor="let event of events" class="col-md-5">
-                    <event-thumbnail [event]="event"></event-thumbnail>
+                    <event-thumbnail ></event-thumbnail>
                 </div>
             </div>
         </div>
