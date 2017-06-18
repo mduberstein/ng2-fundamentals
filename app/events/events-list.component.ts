@@ -5,6 +5,9 @@ import {Component} from '@angular/core'
     template: `
         <div>
         <h1>Upcoming Angular 2 Events</h1>
+        <div class="well">
+            <div>Hello World</div>
+        </div>
         <hr/>
         <event-thumbnail #thumbnail [event]="event1"></event-thumbnail>
         `
