@@ -5,5 +5,5 @@ typings
 .vscode/
 npm-debug.log
 npm-debug.log.*
-
+*Copy.*
 
