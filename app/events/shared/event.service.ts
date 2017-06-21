@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core'
 import {Subject} from 'rxjs/RX'
+import {Observable} from 'rxjs/RX'
 
 @Injectable()
 export class EventService{
-    getEvents(){
-        let subject = new Subject()
+    getEvents():Observable<any>{
+        let subject = new Subject<any>()
         //async simulation
         setTimeout(()=> {subject.next(EVENTS); subject.complete();}, 100)
         return subject
