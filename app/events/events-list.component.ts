@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core'
-import {EventService, IEvent} from './index'
+import {EventService, IEvent} from './shared/index'
+//second level barrel doesn't work!!!
+//import {EventService, IEvent} from './index'
 import {ToastrService} from '../common/toastr.service'
 import {ActivatedRoute} from '@angular/router'
 
