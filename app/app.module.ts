@@ -35,6 +35,7 @@ import {AuthService} from './user/auth.service'
     providers:[EventService //shorthand for {provide: EventService, useValue: EventService}
     , ToastrService, EventRouteActivator, EventsListResolver,
     AuthService,
+    //route guard
     {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}],
     bootstrap:[EventsAppComponent]
 })
