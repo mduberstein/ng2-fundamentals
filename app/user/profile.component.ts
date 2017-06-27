@@ -17,16 +17,17 @@ import {Router} from '@angular/router'
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup
+  private firstName: FormControl
+  private lastName: FormControl
 
   constructor(private auth: AuthService, private route:Router){
-
   }
   ngOnInit(){
-    let firstname = new FormControl(this.auth.currentUser.firstName, Validators.required);
-    let lastname = new FormControl(this.auth.currentUser.lastName, Validators.required);
+    this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
+    this.lastName = new FormControl(this.auth.currentUser.lastName, Validators.required);
     this.profileForm = new FormGroup({
-      firstName: firstname,
-      lastName: lastname
+      firstName: this.firstName,
+      lastName: this.lastName
     });
   }
   saveProfile(formValues){
@@ -36,6 +37,14 @@ export class ProfileComponent implements OnInit {
     }
 
   }
+  validateLastName(){
+    return this.lastName.valid || this.lastName.untouched;
+  }
+
+  validateFirstName(){
+    return this.firstName.valid || this.firstName.untouched;
+  }
+
   cancel(){
     this.route.navigate(['/events']);
   }
