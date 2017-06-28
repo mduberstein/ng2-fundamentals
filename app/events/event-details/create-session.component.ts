@@ -31,7 +31,7 @@ export class CreateSessionComponent{
         this.presenter = new FormControl('', Validators.required);
         this.duration = new FormControl('', Validators.required);
         this.level = new FormControl('', Validators.required);
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400)]);
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), this.restrictedWords]);
 
         this.newSessionForm = new FormGroup({
             name: this.name,
@@ -41,6 +41,12 @@ export class CreateSessionComponent{
             abstract: this.abstract
         })
     }
+    //validator function
+    private restrictedWords(control: FormControl):{[key: string]: any}
+    {   //return error object contains a key matching the validator name
+        return control.value.includes('foo')?{'restrictedWords':'foo'}:null
+    }
+    
     saveSession(formValues){
         //console.log(formValues);
         debugger;
