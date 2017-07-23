@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, Output, EventEmitter} from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {ISession, restrictedWords} from "../index"
 
 @Component({
+    selector: 'create-session',
     templateUrl:
     'app/events/event-details/create-session.component.html'
     ,
@@ -19,6 +20,9 @@ import {ISession, restrictedWords} from "../index"
 
 export class CreateSessionComponent{
     //all methods and fields are public to be directly accessible in the template
+    @Output() saveNewSession = new EventEmitter<ISession>()
+    @Output() cancelAddSession = new EventEmitter()
+
     name:FormControl
     presenter:FormControl
     duration:FormControl
@@ -58,6 +62,12 @@ export class CreateSessionComponent{
             abstract:formValues.abstract,
             voters:[]
         }
-        console.log(session)
+        // Before passing it to event-details.component
+        //console.log(session)
+        this.saveNewSession.emit(session)
+    }
+
+    cancel(){
+        this.cancelAddSession.emit()
     }
 }
