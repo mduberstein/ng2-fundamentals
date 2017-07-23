@@ -18,12 +18,13 @@ import {ISession, restrictedWords} from "../index"
 })
 
 export class CreateSessionComponent{
-    //all methods are public to be directly accessible in the template
+    //all methods and fields are public to be directly accessible in the template
     name:FormControl
     presenter:FormControl
     duration:FormControl
     level:FormControl
     abstract:FormControl
+
     newSessionForm: FormGroup
 
     ngOnInit(){
@@ -31,6 +32,9 @@ export class CreateSessionComponent{
         this.presenter = new FormControl('', Validators.required);
         this.duration = new FormControl('', Validators.required);
         this.level = new FormControl('', Validators.required);
+        // Version 1
+        // this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords])
+        // Final version
         this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords(['foo', 'bar'])])
 
         this.newSessionForm = new FormGroup({
@@ -44,7 +48,7 @@ export class CreateSessionComponent{
 
     saveSession(formValues){
         //console.log(formValues);
-        debugger;
+        //debugger;
         let session:ISession = <ISession> {
             id:undefined,
             name: formValues.name,

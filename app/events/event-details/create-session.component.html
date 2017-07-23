@@ -5,6 +5,7 @@
   <form [formGroup]="newSessionForm" (ngSubmit)="saveSession(newSessionForm.value)" autocomplete="off">
     <div class="form-group" [ngClass]="{'error': name.invalid && name.dirty}">
       <label for="sessionName">Session Name:</label>
+      <!--the difference between touched and dirty: touched - place cursor in the control and tab away and it becomes touched, dirty - you need to type at least one character to make a control dirty-->
       <em *ngIf="name.invalid && name.dirty">Required</em>
       <input formControlName="name" id="sessionName" type="text" class="form-control" placeholder="session name..." />
     </div>
