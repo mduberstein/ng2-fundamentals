@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {AuthService} from './auth.service'
 import {Router} from '@angular/router'
+//to produce Debug Info on the form
+import {JsonPipe} from '@angular/common'
 
 @Component({
   templateUrl: '/app/user/profile.component.html',
@@ -32,7 +34,7 @@ export class ProfileComponent implements OnInit {
   }
   saveProfile(formValues){
     if(this.profileForm.valid){
-      this.auth.upadateCurrentUser(formValues.firstname, formValues.lastname)
+      this.auth.updateCurrentUser(formValues.firstName, formValues.lastName)
     this.route.navigate(['/events']);
     }
 

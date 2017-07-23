@@ -5,6 +5,7 @@
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.name?.invalid && newEventForm.controls.name?.touched}">
       <label for="eventName">Event Name:</label>
       <em *ngIf="newEventForm.controls.name?.invalid && (newEventForm.controls.name?.touched)">Required</em>
+      <!--name attribute's value(here "name") is used to bind newEventForm.value's field, while ngModel's property value(here "event.name") is used to bind the property on the component-->
       <input [(ngModel)]="event.name" name="name" required id="name" type="text" class="form-control" placeholder="Name of your event..." />
     </div>
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.date?.invalid && newEventForm.controls.date?.touched}">
@@ -22,6 +23,9 @@
       <em *ngIf="newEventForm.controls.price?.invalid && (newEventForm.controls.price?.touched)">Required</em>
       <input [(ngModel)]="event.price" name="price" required id="eventPrice" type="text" type="number" class="form-control" placeholder="event price..." />
     </div>
+    <!--the values of ngModelGroup directive and the name attribute of the input element determine binding with the newEventForm.value's property passed to ngSubmit handler
+    in this case value.location.address for example-->
+    <!--the value of ngModel directive binds to the component's model, i.e. event.location.address and provides a two way update-->
     <div ngModelGroup="location">
         <div class="form-group">
         <label for="address">Event Location:</label>

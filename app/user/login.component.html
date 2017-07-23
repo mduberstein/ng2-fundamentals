@@ -2,11 +2,14 @@
 <hr>
 <div class="col-md-4">
   <!--<form #loginForm="ngForm" (submit)="login(loginForm)" autocomplete="off">-->
+  <!--ngForm is the necessary directive for ngModel to work-->
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off">
     <div class="form-group" >
       <label for="userName">User Name:</label>
       <em *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLogin)">Required</em>
       <!--<input id="userName" (input)="userName=$event.target.value" type="text" class="form-control" placeholder="User Name..." />-->
+      <!--for ngModel to work, the right side of the binding has to match the name attribute of the input element, in this case "userName"-->
+      <!--(ngModel) is used instead of [(ngModel)] because this form only requires form-to-component one way binding-->
       <input (ngModel)="userName" name="userName" required id="userName" type="text" class="form-control" placeholder="User Name..." />
     </div>
     <div class="form-group" >
@@ -14,10 +17,66 @@
       <em *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLogin)">Reqired</em>
       <input (ngModel)="password" name="password" required id="password" type="password" class="form-control"placeholder="Password..." />
     </div>
-    <!--disabled buttons don't raise events, this is why we need to wrap this button in span-->
+    <!--disabled buttons don't raise events, this is why we need to wrap this button in span
+    mouseoverLogin - is a template variable available in the template but not present in the component
+    -->
+
     <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
     <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
     </span>
     <button type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
   </form>
+</div>
+<div style="float:right">
+<h2>Debug info</h2>
+    <div class = "col-md-3">
+      loginForm.valid: <br/>
+      loginForm.invalid: <br/>
+      loginForm.dirty: <br/>
+      loginForm.pristine: <br/>
+      loginForm.touched: <br/>
+      loginForm.submitted: <br/>
+      loginForm.untouched: <br/>
+    </div>
+    <div class = "col-md-1" style="padding-left:30px">
+      {{loginForm?.valid}}<br/>
+      {{loginForm?.invalid}}<br/>
+      {{loginForm?.dirty}}<br/>
+      {{loginForm?.pristine}}<br/>
+      {{loginForm?.submitted}}<br/>
+      {{loginForm?.touched}}<br/>
+      {{loginForm?.untouched}}<br/>
+    </div>
+    <div class="col-md-3" style="padding-left:25px">
+      loginForm.controls.userName.valid<br/>
+      loginForm.controls.userName.invalid<br/>
+      loginForm.controls.userName.dirty<br/>
+      loginForm.controls.userName.pristine<br/>
+      loginForm.controls.userName.touched<br/>
+      loginForm.controls.userName.untouched<br/>
+      <br/>
+      <br/>
+      loginForm.controls.password.valid<br/>
+      loginForm.controls.password.invalid<br/>
+      loginForm.controls.password.dirty<br/>
+      loginForm.controls.password.pristine<br/>
+      loginForm.controls.password.touched<br/>
+      loginForm.controls.password.untouched<br/>
+    </div>
+    <div class="col-md-2" style="padding-left:30px; float:right">
+      {{loginForm.controls.userName?.valid}}<br/>
+      {{loginForm.controls.userName?.invalid}}<br/>
+      {{loginForm.controls.userName?.dirty}}<br/>
+      {{loginForm.controls.userName?.pristine}}<br/>
+      {{loginForm.controls.userName?.touched}}<br/>
+      {{loginForm.controls.userName?.untouched}}<br/>
+      <br/>
+      <br/>
+      {{loginForm.controls.password?.valid}}<br/>
+      {{loginForm.controls.password?.invalid}}<br/>
+      {{loginForm.controls.password?.dirty}}<br/>
+      {{loginForm.controls.password?.pristine}}<br/>
+      {{loginForm.controls.password?.touched}}<br/>
+      {{loginForm.controls.password?.untouched}}<br/>
+    </div>
 </div>
