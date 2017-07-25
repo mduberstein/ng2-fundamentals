@@ -40,8 +40,8 @@ const EVENTS:IEvent[] = [
         city: 'London',
         country: 'England'
       },
-      sessions:<ISession[]> [
-        <ISession>{
+      sessions:[
+        {
           id: 1,
           name: "Using Angular 4 Pipes",
           presenter: "Peter Bacon Darwin",
