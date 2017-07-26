@@ -19,13 +19,14 @@ import {EventsAppComponent} from './events-app.component'
 import {NavBarComponent} from './nav/navbar.component'
 // before opaque token usage
 // import {ToastrService} from './common/toastr.service'
-import {TOASTR_TOKEN, Toastr} from './common/toastr.service'
-import {CollapsibleWellComponent} from './common/collapsible-well.component'
+import {JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent, SimpleModalComponent} from './common/index'
 import {appRoutes} from './routes'
 import {Error404Component} from './errors/404.component'
 import {AuthService} from './user/auth.service'
 
-declare let toastr: Toastr
+
+declare let toastr: Toastr;
+declare let jQuery: Object;
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,
@@ -42,11 +43,13 @@ declare let toastr: Toastr
         CreateSessionComponent,
         SessionListComponent,
         CollapsibleWellComponent,
-        DurationPipe
+        DurationPipe,
+        SimpleModalComponent
         ],
     providers:[EventService, //shorthand for {provide: EventService, useValue: EventService}
     // ToastrService, //before OpaqueToken
     {provide: TOASTR_TOKEN, useValue: toastr},
+    {provide: JQ_TOKEN, useValue: jQuery},
      // EventRouteActivator, //equivalent to below long form used often when the useClass value is a derived class of a provide value
     {provide: EventRouteActivator, useClass: EventRouteActivator},
     EventsListResolver,
