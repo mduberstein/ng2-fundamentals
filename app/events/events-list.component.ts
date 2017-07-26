@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import {EventService, IEvent} from './shared/index'
 //second level barrel doesn't work!!!
 //import {EventService, IEvent} from './index'
-import {ToastrService} from '../common/toastr.service'
+// before Opaque Token dependency injection
+// import {ToastrService} from '../common/toastr.service'
 import {ActivatedRoute} from '@angular/router'
 
 @Component({
@@ -14,7 +15,9 @@ import {ActivatedRoute} from '@angular/router'
             <hr/>
             <div class="row">
                 <div *ngFor="let event of events" class="col-md-5">
-                    <event-thumbnail (click)="handleThumbnailClick(event.name)" [event]="event"></event-thumbnail>
+                    <!--click is preempted by [routerLink] on event-thumbnail component
+                    <event-thumbnail (click)="handleThumbnailClick(event.name)" [event]="event"></event-thumbnail>-->
+                    <event-thumbnail [event]="event"></event-thumbnail>
                 </div>
             </div>
         </div>
@@ -23,7 +26,9 @@ import {ActivatedRoute} from '@angular/router'
 
 export class EventsListComponent implements OnInit {
     events:IEvent[]
-    constructor (private eventService: EventService, private toastr: ToastrService, private route: ActivatedRoute){
+    constructor (private eventService: EventService,
+    //private toastr: ToastrService,
+    private route: ActivatedRoute){
     }
     ngOnInit(){
         //this.eventService.getEvents().subscribe(events=>{this.events = events;});
@@ -33,7 +38,7 @@ export class EventsListComponent implements OnInit {
         this.events = this.route.snapshot.data['events'];
     }
 
-    handleThumbnailClick(eventName){
-        this.toastr.success(eventName)
-    }
+    // handleThumbnailClick(eventName){
+    //     this.toastr.success(eventName)
+    // }
 }

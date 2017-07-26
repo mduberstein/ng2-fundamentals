@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {AuthService} from './auth.service'
 import {Router} from '@angular/router'
 //to produce Debug Info on the form
 import {JsonPipe} from '@angular/common'
+import {TOASTR_TOKEN, Toastr} from '../common/toastr.service'
 
 @Component({
   templateUrl: '/app/user/profile.component.html',
@@ -22,7 +23,9 @@ export class ProfileComponent implements OnInit {
   private firstName: FormControl
   private lastName: FormControl
 
-  constructor(private auth: AuthService, private route:Router){
+  // in Angular 1 dependency injection was string based, not typed based
+  // angular.module('app).service('myservice', ...) where my service is the name of the service
+  constructor(private auth: AuthService, private route:Router, @Inject(TOASTR_TOKEN) private toastr: Toastr){
   }
   ngOnInit(){
     this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
@@ -35,7 +38,8 @@ export class ProfileComponent implements OnInit {
   saveProfile(formValues){
     if(this.profileForm.valid){
       this.auth.updateCurrentUser(formValues.firstName, formValues.lastName)
-    this.route.navigate(['/events']);
+    //this.route.navigate(['/events']);
+    this.toastr.success('Profile Saved')
     }
 
   }
