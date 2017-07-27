@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {EventService} from '../shared/event.service'
-import {ActivatedRoute} from '@angular/router'
+import {ActivatedRoute, Params} from '@angular/router'
 import {IEvent, ISession} from '../shared/index'
 
 @Component({
@@ -19,7 +19,15 @@ export class EventDetailsComponent{
     sortBy: string = 'votes';
     constructor(private eventService:EventService, private route:ActivatedRoute){}
     ngOnInit(){
-        this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
+        //bug fixed in clip "routing to the same component"
+        // this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
+        this.route.params.forEach((params:Params)=>{
+            //provide full state reset when navigating to another route on the same page
+            this.event = this.eventService.getEvent(+params['id']);
+            this.addMode = false;
+            this.filterBy = 'all'
+            this.sortBy = 'votes'
+        })
     }
     // display create session component in <create-session> selector right in the event-details.component.html
     addSession(){
