@@ -12,6 +12,7 @@ import {IEvent, ISession} from '../shared/index'
     `
     ]
 })
+
 export class EventDetailsComponent{
     event:IEvent
     addMode: boolean

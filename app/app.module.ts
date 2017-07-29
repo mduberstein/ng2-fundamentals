@@ -12,6 +12,8 @@ import{
     EventsListResolver,
     CreateSessionComponent,
     SessionListComponent,
+    UpvoteComponent,
+    VoterService,
     DurationPipe
 } from './events/index'
 
@@ -23,6 +25,7 @@ import {JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent, SimpleModalCom
 import {appRoutes} from './routes'
 import {Error404Component} from './errors/404.component'
 import {AuthService} from './user/auth.service'
+// import {VoterService} from './events/event-details/voter.service'
 
 
 declare let toastr: Toastr;
@@ -44,6 +47,7 @@ declare let jQuery: Object;
         SessionListComponent,
         CollapsibleWellComponent,
         SimpleModalComponent,
+        UpvoteComponent,
         ModalTriggerDirective,
         DurationPipe
         ],
@@ -54,6 +58,7 @@ declare let jQuery: Object;
      // EventRouteActivator, //equivalent to below long form used often when the useClass value is a derived class of a provide value
     {provide: EventRouteActivator, useClass: EventRouteActivator},
     EventsListResolver,
+    VoterService,
     AuthService,
     //route guard used by CreateNewEvent route, see routes.ts
     {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
