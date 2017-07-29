@@ -8,11 +8,11 @@ import {ISession} from '../shared'
         <div class="votingWidgetContainer pointable" (click)="onClick()">
             <div class="well votingWidget">
                 <div class="votingButton">
-                    <!-- before clip; Using @Input Setters-->
+                    <!-- before clip; Using @Input Setters
                     <i *ngIf="voted" class="glyphicon glyphicon-heart"></i>
                     <i *ngIf="!voted" class="glyphicon glyphicon-heart-empty"></i>
-
-                    <!--<i class="glyphicon glyphicon-heart" [style.color]="iconColor"></i>-->
+                    -->
+                    <i class="glyphicon glyphicon-heart" [style.color]="iconColor"></i>
                 </div>
                 <div class="badge badge-inverse votingCount">
                     <div>{{count}}</div>
@@ -25,10 +25,11 @@ import {ISession} from '../shared'
 export class UpvoteComponent {
     @Input() session: ISession;
     @Input() count: number;
-    @Input() voted: boolean;
-    // @Input() set voted(val){
-    //     this.iconColor = val ? 'red' : 'white';
-    // }
+    //before clip; Using @Input Setters
+    //@Input() voted: boolean;
+    @Input() set voted(val){
+        this.iconColor = val ? 'red' : 'white';
+    }
     @Output() vote = new EventEmitter();
     public iconColor:string;
 
