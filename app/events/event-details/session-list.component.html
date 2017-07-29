@@ -1,7 +1,7 @@
 <div class="row" *ngFor="let session of visibleSessions">
     <div class="col-md-1">
         <div *ngIf="auth.isAuthenticated()">
-            <upvote (vote)="toggleVote(session)" [count]="session.voters.length" [voted]="userHasVoted(session)"></upvote>
+            <upvote (vote)="toggleVote(session)" [count]="session.voters.length" [voted]="userHasVoted(session)" [session]="session"></upvote>
         </div>
     </div>
     <div class="col-md-10">
