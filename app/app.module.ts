@@ -53,6 +53,8 @@ declare let jQuery: Object;
         LocationValidator,
         DurationPipe
         ],
+    //Dependency Injection - providers in module
+    //https://angular.io/guide/dependency-injection
     providers:[EventService, //shorthand for {provide: EventService, useValue: EventService}
     // ToastrService, //before OpaqueToken
     {provide: TOASTR_TOKEN, useValue: toastr},
