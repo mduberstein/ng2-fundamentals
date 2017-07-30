@@ -16,7 +16,7 @@ export class SessionListComponent{
 
     constructor(private auth: AuthService, private voterService:VoterService){}
 
-    // this method is called every time one of the input variables into this component changes, this method is executed before any data field in this class is set, so guard
+    // this method is called every time one of the input variables into this component changes, this method is executed before any data field in this class is set, so guard for sessions not being null or empty
     ngOnChanges(){
         if(this.sessions){
             this.filterSessions(this.filterBy); //passed in filter to make method stateless

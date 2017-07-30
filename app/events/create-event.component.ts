@@ -1,6 +1,8 @@
 import {Component} from '@angular/core'
 import {Router} from '@angular/router'
+import {NgModelGroup} from '@angular/forms'
 import {EventService} from './shared/index'
+
 
 @Component({
     templateUrl: '/app/events/create-event.component.html',
@@ -17,9 +19,10 @@ import {EventService} from './shared/index'
 
 export class CreateEventComponent{
     isDirty:boolean = true
-    event: any
+    event: any ={location:{}}
     constructor(private router:Router, private eventService: EventService){}
 
+    // Makes it a create form with default values
     ngOnInit(){
         this.event = {
             name: 'Ng Spectacular',
@@ -27,9 +30,9 @@ export class CreateEventComponent{
             time: '10am',
             price: '799.99',
             location:{
-                address: '456 Happy St',
-                city: 'Felicity',
-                country: 'Angularstan'
+                // address: '456 Happy St',
+                // city: 'Felicity',
+                // country: 'Angularstan'
             },
             onlineUrl: 'http://ngSpectacular.com',
             imageUrl: 'http://ngSpectacular.com/logo.png'
@@ -42,5 +45,9 @@ export class CreateEventComponent{
     }
     cancel(){
         this.router.navigate(['/events'])
+    }
+
+    triggerValidationOfLocationGroup(locationGroup: NgModelGroup){
+        locationGroup.control.controls.address.updateValueAndValidity();
     }
 }

@@ -27,9 +27,10 @@
     <!--the values of ngModelGroup directive and the name attribute of the input element determine binding with the newEventForm.value's property passed to ngSubmit handler
     in this case value.location.address for example-->
     <!--the value of ngModel directive binds to the component's model, i.e. event.location.address and provides a two way update-->
-    <div ngModelGroup="location" validateLocation>
+    <div ngModelGroup="location" #locationGroup="ngModelGroup" validateLocation >
         <div class="form-group">
         <label for="address">Event Location:</label>
+        <em *ngIf="locationGroup?.invalid && locationGroup?.touched">You must enter either the full location OR an online Url</em>
         <input [(ngModel)]="event.location.address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
         </div>
         <div class="row">
@@ -43,7 +44,7 @@
     </div>
     <div class="form-group">
       <label for="onlineUrl">Online Url:</label>
-      <input [(ngModel)]="event.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
+      <input [(ngModel)]="event.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" (change)="triggerValidationOfLocationGroup(locationGroup)" placeholder="Online Url..." />
     </div>
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Image:</label>
@@ -53,7 +54,63 @@
       <img [src]="newEventForm.controls.imageUrl.value" *ngIf="newEventForm.controls.imageUrl?.valid"/>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" [disabled]="newEventForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
+    <button type="submit" [disabled]="newEventForm.invalid" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
   </form>
+</div>
+
+<div style="float:right">
+<h2>Debug info</h2>
+    <div class = "col-md-3">
+      newEventForm.valid: <br/>
+      newEventForm.invalid: <br/>
+      newEventForm.dirty: <br/>
+      newEventForm.pristine: <br/>
+      newEventForm.touched: <br/>
+      newEventForm.submitted: <br/>
+      newEventForm.untouched: <br/>
+    </div>
+    <div class = "col-md-1" style="padding-left:30px">
+      {{newEventForm?.valid}}<br/>
+      {{newEventForm?.invalid}}<br/>
+      {{newEventForm?.dirty}}<br/>
+      {{newEventForm?.pristine}}<br/>
+      {{newEventForm?.submitted}}<br/>
+      {{newEventForm?.touched}}<br/>
+      {{newEventForm?.untouched}}<br/>
+    </div>
+    <div class="col-md-3" style="padding-left:25px">
+      newEventForm.controls.location.address.valid<br/>
+      newEventForm.controls.location.address.invalid<br/>
+      newEventForm.controls.location.address.dirty<br/>
+      newEventForm.controls.location.address.pristine<br/>
+      newEventForm.controls.location.address.touched<br/>
+      newEventForm.controls.location.address.untouched<br/>
+      <br/>
+      <br/>
+      newEventForm.controls.location.onlineUrl.valid<br/>
+      newEventForm.controls.location.onlineUrl.invalid<br/>
+      newEventForm.controls.location.onlineUrl.dirty<br/>
+      newEventForm.controls.location.onlineUrl.pristine<br/>
+      newEventForm.controls.location.onlineUrl.touched<br/>
+      newEventForm.controls.location.onlineUrl.untouched<br/>
+    </div>
+    <div class="col-md-2" style="padding-left:30px; float:right">
+      <!-- Uncommenting any of the lines below makes form immediately valid, Why? Potentially runs default validator instead of the custom one
+      Below are the variations of access to test
+      {{newEventForm.controls.location.address?.valid}}, {{newEventForm.controls.location.control.controls.address?.valid}}, {{locationGroup.control.controls.address?.valid}}<br/>
+      {{newEventForm.controls.location.address?.invalid}}<br/>
+      {{newEventForm.controls.location.address?.dirty}}<br/>
+      {{newEventForm.controls.location.address?.pristine}}<br/>
+      {{newEventForm.controls.location.address?.touched}}<br/>
+      {{newEventForm.controls.location.address?.untouched}}<br/>
+      <br/>
+      <br/>
+      {{newEventForm.controls.location.onlineUrl?.valid}}<br/>
+      {{newEventForm.controls.location.onlineUrl?.invalid}}<br/>
+      {{newEventForm.controls.location.onlineUrl?.dirty}}<br/>
+      {{newEventForm.controls.location.onlineUrl?.pristine}}<br/>
+      {{newEventForm.controls.location.onlineUrl?.touched}}<br/>
+      {{newEventForm.controls.location.onlineUrl?.untouched}}<br/>-->
+    </div>
 </div>
