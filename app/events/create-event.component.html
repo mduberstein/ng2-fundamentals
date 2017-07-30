@@ -1,3 +1,4 @@
+<!--Template Form example-->
 <h1>New Event</h1>
 <hr>
 <div class="col-md-6">
@@ -26,7 +27,7 @@
     <!--the values of ngModelGroup directive and the name attribute of the input element determine binding with the newEventForm.value's property passed to ngSubmit handler
     in this case value.location.address for example-->
     <!--the value of ngModel directive binds to the component's model, i.e. event.location.address and provides a two way update-->
-    <div ngModelGroup="location">
+    <div ngModelGroup="location" validateLocation>
         <div class="form-group">
         <label for="address">Event Location:</label>
         <input [(ngModel)]="event.location.address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
