@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 import {RouterModule} from '@angular/router'
+import {HttpModule} from '@angular/http'
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{
     EventsListComponent,
@@ -33,7 +35,9 @@ declare let toastr: Toastr;
 declare let jQuery: Object;
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule,
+    imports: [BrowserModule, FormsModule,
+        HttpModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(appRoutes)
     ],
     declarations: [

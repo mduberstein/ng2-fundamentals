@@ -47,7 +47,8 @@ export class CreateEventComponent{
         this.router.navigate(['/events'])
     }
 
-    triggerValidationOfLocationGroup(locationGroup: NgModelGroup){
+    //triggerValidationOfLocationGroup(locationGroup: NgModelGroup){
+    triggerValidationOfLocationGroup(locationGroup: any){
         locationGroup.control.controls.address.updateValueAndValidity();
     }
 }

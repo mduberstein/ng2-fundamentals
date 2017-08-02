@@ -24,10 +24,16 @@ export class EventDetailsComponent{
         // this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
         this.route.params.forEach((params:Params)=>{
             //provide full state reset when navigating to another route on the same page
-            this.event = this.eventService.getEvent(+params['id']);
-            this.addMode = false;
-            this.filterBy = 'all'
-            this.sortBy = 'votes'
+            this.eventService.getEvent(+params['id']).subscribe((event:IEvent) => {
+                this.event = event;
+                this.addMode = false;
+                this.filterBy = 'all';
+                this.sortBy = 'votes';})
+            //before Http
+            //this.event = this.eventService.getEvent(+params['id']);
+            //this.addMode = false;
+            //this.filterBy = 'all'
+            //this.sortBy = 'votes'
         })
     }
     // display create session component in <create-session> selector right in the event-details.component.html
