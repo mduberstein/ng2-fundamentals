@@ -20,20 +20,30 @@ export class EventDetailsComponent{
     sortBy: string = 'votes';
     constructor(private eventService:EventService, private route:ActivatedRoute){}
     ngOnInit(){
-        //bug fixed in clip "routing to the same component"
+        // This component ROUTES TO ITSELF
+        // //bug fixed in clip "routing to the same component"
         // this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
-        this.route.params.forEach((params:Params)=>{
-            //provide full state reset when navigating to another route on the same page
-            this.eventService.getEvent(+params['id']).subscribe((event:IEvent) => {
-                this.event = event;
-                this.addMode = false;
-                this.filterBy = 'all';
-                this.sortBy = 'votes';})
-            //before Http
-            //this.event = this.eventService.getEvent(+params['id']);
-            //this.addMode = false;
-            //this.filterBy = 'all'
-            //this.sortBy = 'votes'
+
+        // This will only refresh the this.event the first time the page routed to
+        // this.route.params.forEach((params:Params)=>{
+        //     this.event = this.route.snapshot.data['event']
+        this.route.data.forEach((data)=>{
+            this.event = data['event'];
+            this.addMode = false;
+            this.filterBy = 'all'
+            this.sortBy = 'votes'
+        // Alt 2: before replacing EventRouteActivator with EventListResolver
+        // provide full state reset when navigating to another route on the same page
+        //     this.eventService.getEvent(+params['id']).subscribe((event:IEvent) => {
+        //         this.event = event;
+        //         this.addMode = false;
+        //         this.filterBy = 'all';
+        //         this.sortBy = 'votes';})
+        //     //Alt 1: before Http
+        //     //this.event = this.eventService.getEvent(+params['id']);
+        //     //this.addMode = false;
+        //     //this.filterBy = 'all'
+        //     //this.sortBy = 'votes'
         })
     }
     // display create session component in <create-session> selector right in the event-details.component.html
