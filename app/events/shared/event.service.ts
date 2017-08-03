@@ -42,27 +42,33 @@ export class EventService {
     }).catch(this.handleError)
   }
 
-  // typically it is upate is a PUT request, howerver this server is written to derive is this is POST or PUT from the precence/value of the Id field,
-  // with HTTP
-  // updateEvent(event) { //becomes redundant method
+  // typically upate is a PUT request, howerver this server is written to derive if this is POST or PUT from the presence/value of the Id field,
+  // with HTTP becomes redundant method
+  // updateEvent(event) {
   //   let index = EVENTS.findIndex(x => x.id == event.id)
   //   EVENTS[index] = event
   // }
 
-  searchSessions(searchTerm: string) {
-    let term = searchTerm.toLocaleLowerCase();
-    let results: ISession[] = [];
+  //before Http
+  // searchSessions(searchTerm: string) {
+  //   let term = searchTerm.toLocaleLowerCase();
+  //   let results: ISession[] = [];
 
-    EVENTS.forEach(event => {
-      let matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
-      matchingSessions = matchingSessions.map((session: any) => {
-        session.eventId = event.id; return session;
-      })
-      results = results.concat(matchingSessions);
-    })
-    let emitter = new EventEmitter(true); //true means emit event asynchronously
-    setTimeout(() => emitter.emit(results), 100);
-    return emitter;
+  //   EVENTS.forEach(event => {
+  //     let matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+  //     matchingSessions = matchingSessions.map((session: any) => {
+  //       session.eventId = event.id; return session;
+  //     })
+  //     results = results.concat(matchingSessions);
+  //   })
+  //   let emitter = new EventEmitter(true); //true means emit event asynchronously
+  //   setTimeout(() => emitter.emit(results), 100);
+  //   return emitter;
+  // }
+  searchSessions(searchTerm: string) {
+    return this.http.get("/api/sessions/search?search=" + searchTerm).map((response: Response) => {
+      return response.json();
+    }).catch(this.handleError);
   }
 
   private handleError(error: Response) {
