@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core'
 //import {ISession} from '../shared/index'
 import { ISession } from '../shared/event.model'
-import {Observable} from 'rxjs/RX'
+import { Observable } from 'rxjs/Rx'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
 @Injectable()
 export class VoterService {
-
-  constructor(private http: Http){}
+  constructor(private http: Http) { }
   deleteVoter(eventId: number, session: ISession, voterName: string) {
     session.voters = session.voters.filter(voter => voter !== voterName);
     let url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
@@ -25,11 +24,11 @@ export class VoterService {
     return this.http.post(url, JSON.stringify({}), options).catch(this.handleError);
   }
 
-    userHasVoted(session: ISession, voterName: string){
-        return session.voters.some(voter => voter === voterName);
-    }
+  userHasVoted(session: ISession, voterName: string) {
+    return session.voters.some(voter => voter === voterName);
+  }
 
-      private handleError(error: Response) {
+  private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
 }
