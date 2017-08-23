@@ -63,4 +63,12 @@ export class AuthService {
             })
             .subscribe()
     }
+
+    logout() {
+        this.currentUser = undefined;
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        //mistakenly used .put which was not implemented on the server and thus wasted a lot of time
+        return this.http.post('/api/logout', JSON.stringify({}), options)
+    }
 }
