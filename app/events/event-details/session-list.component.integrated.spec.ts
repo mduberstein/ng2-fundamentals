@@ -1,5 +1,5 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
-import { DebugElement } from '@angular/core'
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core'
 import { SessionListComponent } from './session-list.component'
 import { UpvoteComponent } from './upvote.component'
 import { DurationPipe } from '../shared/duration.pipe'
@@ -29,12 +29,19 @@ describe('SessionListComponent', () => {
         //compileComponents() compiles the templates and stylesheets of a component. It is not needed when using webpack (where webpack does the job for us), but is necessary when using SystemJs.
         TestBed.configureTestingModule({
             imports: [],
-            declarations: [SessionListComponent, UpvoteComponent, DurationPipe, CollapsibleWellComponent],
+            declarations: [
+                SessionListComponent,
+                // Shallow Testing: prevent errors from being thrown when angular encounters html tags for which components have not been added to testingModule's declarations property
+                //UpvoteComponent,
+                DurationPipe
+                //, CollapsibleWellComponent
+            ],
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: VoterService, useValue: mockVoterService }
             ],
-            schemas: []
+            // Shallow Testing: prevent errors from being thrown when angular encounters html tags for which components have not been added to testingModule's declarations property
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }))
 
