@@ -1,3 +1,4 @@
+//isolated test in which mockAuthService and mokeVoterService are undefined objects, because SessionListComponent.ngOnChanges() doesn't excercise them
 import { SessionListComponent } from './session-list.component'
 import { ISession } from '../shared/event.model'
 
