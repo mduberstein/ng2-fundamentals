@@ -15,7 +15,9 @@ describe('SessionListComponent', () => {
         element: HTMLElement,
         debugEl: DebugElement
 
-    //asynch fuction uses the magic of Zone in Angular a synchronously execute asynchronous function and is a necessary piece of any integration test
+    //async fuction uses the magic of Async Test Zone in Angular a synchronously execute asynchronous function and is a necessary piece of any integration test
+    //from https://angular.io/guide/testing
+    //async arranges for the body of the beforeEach to run in a special async test zone that hides the mechanics of asynchronous execution of TestBed.compileComponents();
     beforeEach(async(() => {
         let mockAuthService = {
             isAuthenticated: () => true,
@@ -37,6 +39,7 @@ describe('SessionListComponent', () => {
     }))
 
     beforeEach(() => {
+        //after the call below, TestBed.configureTestingModule or TestBed.override... methods can no longer be called
         fixture = TestBed.createComponent(SessionListComponent);
         component = fixture.componentInstance;
         debugEl = fixture.debugElement;
@@ -53,11 +56,13 @@ describe('SessionListComponent', () => {
 
             //Act, ngOnInit gets fired on its own. ngOnChanges is not fired on its own because the input properties are not set from parent component in a test situation, so the test has to call this method directly
             component.ngOnChanges();
-            //changes are rerendered to html
+            //changes are rerendered to html, testModule does not automatically detect changes by design
             fixture.detectChanges();
 
-            expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
-
+            // Version: before Clip "Using DebugElement"
+            //expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
+            // Equivalent version after Clip: 'Using DebugElement'
+            expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
         })
     })
 })
