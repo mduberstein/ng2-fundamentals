@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
-//import {ISession} from '../shared/index'
+// import {ISession} from '../shared/index'
 import { ISession } from '../shared/event.model'
-import { Observable } from 'rxjs/Rx'
+import { Observable } from 'rxjs/Observable'
+
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
 @Injectable()
