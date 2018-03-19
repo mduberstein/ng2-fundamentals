@@ -14,6 +14,8 @@ export class AuthService {
         //names of the properties must be lowercase
         let loginInfo = { username: userName, password: password };
         return this.http.post('/api/login', JSON.stringify(loginInfo), options)
+        //https://www.learnrxjs.io/operators/utility/do.html
+        //only returs resonse if username is johnpapa, and any password, otherwise throws 403 error - forbidden
             .do(resp => {
                 if (resp) {
                     this.currentUser = <IUser>resp.json().user;
@@ -47,7 +49,7 @@ export class AuthService {
     }
 
     checkAuthenticationStatus() {
-        //the get.. call to the server with this URL returns nothing if user is not authenticated, it returns current user if a user is authenticated, we convert the string returne from the server to an object - user object if authenticated and empty object if not
+        //the get.. call to the server with this URL returns nothing if user is not authenticated, it returns current user if a user is authenticated, we convert the string returned from the server to an object - user object if authenticated and empty object if not
         //(response: any) is required because the Response object doesn't have _body property, but the object returned from the server does
         return this.http.get('/api/currentIdentity').map((response: any) => {
             if (response._body) {

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core'
 import {CommonModule} from '@angular/common'
 import {RouterModule} from '@angular/router'
-// FormsModule is needed for template-driven foms, specifically for
+// FormsModule is needed for template-driven forms, specifically for
 // directives: ngModel and ngForm.
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {userRoutes} from './user.routes'

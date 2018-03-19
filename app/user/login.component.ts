@@ -9,7 +9,6 @@ import {Router} from '@angular/router'
     ]
 })
 export class LoginComponent{
-    // stopped here
     loginInvalid = false;
     constructor(private authService: AuthService, private router:Router){}
     login(formValues){

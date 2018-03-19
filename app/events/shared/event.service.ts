@@ -9,7 +9,8 @@ export class EventService {
 
   //Subject implements Obervable
   getEvents(): Observable<IEvent[]> {
-    return this.http.get('/api/events').map((response: Response) => {
+    return this.http.get('/api/events')
+    .map((response: Response) => {
       return <IEvent[]>response.json();
     }).catch(this.handleError);
     // before adding Http
@@ -20,7 +21,8 @@ export class EventService {
   }
 
   getEvent(id: number): Observable<IEvent> {
-    return this.http.get("/api/events/" + id).map((response: Response) => {
+    return this.http.get("/api/events/" + id)
+    .map((response: Response) => {
       return <IEvent>response.json();
     }).catch(this.handleError);
   }
@@ -37,7 +39,7 @@ export class EventService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post('api/events', JSON.stringify(event), options).map((response: Response) => {
-      // this return of saved event in the body of HTTP response form the server is optional by Http starndard for POST or PUT - http://www.restapitutorial.com/lessons/httpmethods.html, only status code of 201(for POST) and ,
+      // this return of saved event in the body of HTTP response form the server is optional by Http starndard for POST or PUT - http://www.restapitutorial.com/lessons/httpmethods.html, only status code of 201(for POST) and 204 (No Content) or 200 (OK) for put
       return response.json();
     }).catch(this.handleError)
   }
@@ -66,7 +68,8 @@ export class EventService {
   //   return emitter;
   // }
   searchSessions(searchTerm: string) {
-    return this.http.get("/api/sessions/search?search=" + searchTerm).map((response: Response) => {
+    return this.http.get("/api/sessions/search?search=" + searchTerm)
+    .map((response: Response) => {
       return response.json();
     }).catch(this.handleError);
   }

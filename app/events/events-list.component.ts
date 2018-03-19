@@ -7,7 +7,7 @@ import {EventService, IEvent} from './shared/index'
 import {ActivatedRoute} from '@angular/router'
 
 @Component({
-    //does not have selector because it corresponds has an entry in the routes.ts route table
+    //does not have selector because it has an entry in the routes.ts route table
     //thus is called a routed module, and is displayed in <router-outlet> of events-app.component.ts
     template: `
         <div>
@@ -33,7 +33,7 @@ export class EventsListComponent implements OnInit {
     ngOnInit(){
         //this.eventService.getEvents().subscribe(events=>{this.events = events;});
 
-        //the below will be called acynchronously after EventListResolver.resolve() returns, i.e. when the EventService.getEvents() returned Observable returns stream of events, so gnOnInit() will not return
+        //the below will be called acynchronously after EventListResolver.resolve() returns, i.e. when the EventService.getEvents() returned Observable returns stream of events, so ngOnInit() will not return
         //'events' below match resolve.events property on the route './events'
         this.events = this.route.snapshot.data['events'];
     }
