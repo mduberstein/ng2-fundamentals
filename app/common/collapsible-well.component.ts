@@ -5,7 +5,8 @@ import {Component, Input} from '@angular/core'
     template: `
     <div (click)="toggleContent()" class="well pointable">
         <!--Version 2 - Single Projection slot-->
-        <!--<h4 class="well-title">{{title}}</h4>-->
+        <!--<h4 class="well-title">{{title}}</h4>
+        <ng-content *ngIf="visible"></ng-content>-->
         <h4>
             <ng-content select="[well-title]"></ng-content>
         </h4>
